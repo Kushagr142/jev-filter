@@ -7,7 +7,7 @@ Jev X Post Filter is a browser extension that classifies visible X posts accordi
 ## Data the extension processes
 
 - **Post text:** The extension reads post text visible in your X/Twitter feed when you have saved categories and an OpenRouter API key. It sends the text to OpenRouter to obtain category scores. The extension limits each submitted post to 8,000 characters.
-- **Categories:** Your category descriptions are saved in Chrome local extension storage so they remain available between browser sessions.
+- **Settings:** Your category descriptions, match behavior (highlight or hide), and badge display preference are saved in Chrome local extension storage so they remain available between browser sessions.
 - **OpenRouter API key:** The key you enter is held in Chrome session storage and used by the extension service worker to authenticate requests to OpenRouter. It is cleared when the browser session ends or when you choose **Forget API key**. Updating from a previous version removes an older locally stored key.
 - **Detection counts:** The extension saves aggregate positive counts by category and hour in Chrome local storage for up to 90 days, plus minute-level counts for the rolling last hour. Current-session totals are held in session storage. These counters contain category labels and counts, not post text or post IDs.
 

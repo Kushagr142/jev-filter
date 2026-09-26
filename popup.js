@@ -3,12 +3,13 @@ const status = document.getElementById('status');
 
 Promise.all([
   chrome.storage.session.get('apiKey'),
-  chrome.storage.local.get(['categories', 'badgePeriod'])
+  chrome.storage.local.get(['categories', 'badgePeriod', 'matchAction'])
 ]).then(([session, saved]) => {
   document.getElementById('apiKey').value = session.apiKey || '';
   const categories = saved.categories || [];
   fields.forEach((field, index) => { field.value = categories[index] || ''; });
   document.getElementById('badgePeriod').value = saved.badgePeriod || 'last-hour';
+  document.getElementById('matchAction').value = saved.matchAction || 'highlight';
 });
 
 document.getElementById('settings').addEventListener('submit', (event) => {
@@ -16,12 +17,13 @@ document.getElementById('settings').addEventListener('submit', (event) => {
   const apiKey = document.getElementById('apiKey').value.trim();
   const categories = [...new Set(fields.map((field) => field.value.trim()).filter(Boolean))];
   const badgePeriod = document.getElementById('badgePeriod').value;
-  const saves = [chrome.storage.local.set({ categories, badgePeriod })];
+  const matchAction = document.getElementById('matchAction').value;
+  const saves = [chrome.storage.local.set({ categories, badgePeriod, matchAction })];
   if (apiKey) saves.push(chrome.storage.session.set({ apiKey }));
   Promise.all(saves).then(() => {
     if (!apiKey) return showStatus('Categories saved. Add an API key to classify posts.');
     showStatus(categories.length
-      ? 'Settings saved. Refresh X to classify its posts.'
+      ? 'Settings saved. X will recheck visible posts.'
       : 'Categories cleared. Add a category to resume classification.');
   });
 });

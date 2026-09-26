@@ -22,7 +22,7 @@ The content script match patterns are limited to X/Twitter. The extension does n
 - **Purpose:** determine whether the post matches the user's categories.
 - **Other recipients:** no project-operated server receives the data.
 - **API key:** provided by the user, held in Chrome session storage, accessible to the extension service worker, and transmitted to OpenRouter as a bearer credential. It is cleared when the browser session ends or when the user selects **Forget API key**.
-- **Categories:** saved in Chrome local extension storage.
+- **Settings:** categories, match behavior (highlight or hide), and badge display preference are saved in Chrome local extension storage.
 - **Detection statistics:** aggregate positive counts by category and hour are stored locally for up to 90 days, with minute-level counts kept for the rolling last hour. Session totals stay in session storage. No post text or post IDs are included in the statistics.
 - **Retention by this extension:** post text and classification results are not persisted by the extension; results are applied to the page DOM while the page is open.
 

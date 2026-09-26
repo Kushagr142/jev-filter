@@ -10,7 +10,7 @@
   <main>
     <header>
       <div class="mark">J</div>
-      <div><h1>Jev post filter</h1><p>Highlight matching posts on X</p></div>
+      <div><h1>Jev post filter</h1><p>Filter matching posts on X</p></div>
     </header>
     <form id="settings">
       <label class="field-label" for="apiKey">OpenRouter API key</label>
@@ -24,6 +24,11 @@
         <input id="category4" type="text" maxlength="100" placeholder="Category 4 (optional)">
         <input id="category5" type="text" maxlength="100" placeholder="Category 5 (optional)">
       </div>
+      <label class="field-label badge-setting" for="matchAction">When a post matches</label>
+      <select id="matchAction">
+        <option value="highlight">Highlight red</option>
+        <option value="hide">Hide post</option>
+      </select>
       <label class="field-label badge-setting" for="badgePeriod">Toolbar badge counts</label>
       <select id="badgePeriod">
         <option value="last-hour">Positive detections in the last hour</option>
@@ -34,7 +39,7 @@
       <button id="openStats" class="secondary" type="button">View hourly, daily, and weekly stats</button>
       <div id="status" role="status" aria-live="polite"></div>
     </form>
-    <footer>Jev 1.13 · A matching post gets a red highlight</footer>
+    <footer>Jev 1.13 · Choose whether matches are highlighted or hidden</footer>
   </main>
   <script src="popup.js"></script>
 </body>

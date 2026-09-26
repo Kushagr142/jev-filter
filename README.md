@@ -1,6 +1,6 @@
 # Jev X Post Filter
 
-A Chrome extension that asks TypeSafe Jev 1.13, through OpenRouter, whether X posts match your categories. Matching posts receive a red highlight.
+A Chrome extension that asks TypeSafe Jev 1.13, through OpenRouter, whether X posts match your categories. Matching posts can be highlighted red or hidden.
 
 ## Requirements
 
@@ -28,6 +28,8 @@ A Chrome extension that asks TypeSafe Jev 1.13, through OpenRouter, whether X po
    - `posts discussing baseball`
 5. Click **Save settings**.
 6. Open or refresh [x.com](https://x.com) to start classifying posts.
+
+Use **When a post matches** to choose **Highlight red** or **Hide post**. Changing this option rechecks visible posts using the selected behavior.
 
 Categories are saved in Chrome's local extension storage. The API key is held in Chrome session storage, which is cleared when the browser session ends, and can also be removed with **Forget API key**. The key is only read by the extension service worker and sent to OpenRouter in classification requests. Each classified post uses your OpenRouter account. Jev evaluates each category separately, and a post is highlighted if any category's returned probability is at least `0.5`.
 

@@ -2,20 +2,29 @@ const POST_SELECTOR = 'article[data-testid="tweet"]';
 const MATCH_COLOR = 'rgba(255, 0, 0, 0.18)';
 const BORDER_COLOR = '#e5484d';
 const CHECKED = 'jevFilterChecked';
+const CHECKED_ATTRIBUTE = 'data-jev-filter-checked';
 const pending = [];
 let active = 0;
-let config = { categories: [] };
+const originalStyles = new WeakMap();
+const originalTitles = new WeakMap();
+let config = { categories: [], matchAction: 'highlight' };
 
-chrome.storage.local.get(['categories'], (saved) => {
-  config = { categories: (saved.categories || []).filter(Boolean).slice(0, 5) };
+chrome.storage.local.get(['categories', 'matchAction'], (saved) => {
+  config = {
+    categories: (saved.categories || []).filter(Boolean).slice(0, 5),
+    matchAction: saved.matchAction === 'hide' ? 'hide' : 'highlight'
+  };
   scan(document);
 });
 
 chrome.storage.onChanged.addListener((changes, area) => {
-  if (area !== 'local' || !changes.categories) return;
-  chrome.storage.local.get(['categories'], (saved) => {
-    config = { categories: (saved.categories || []).filter(Boolean).slice(0, 5) };
-    document.querySelectorAll(`[${CHECKED}]`).forEach((post) => {
+  if (area !== 'local' || (!changes.categories && !changes.matchAction)) return;
+  chrome.storage.local.get(['categories', 'matchAction'], (saved) => {
+    config = {
+      categories: (saved.categories || []).filter(Boolean).slice(0, 5),
+      matchAction: saved.matchAction === 'hide' ? 'hide' : 'highlight'
+    };
+    document.querySelectorAll(`[${CHECKED_ATTRIBUTE}]`).forEach((post) => {
       delete post.dataset.jevFilterChecked;
       resetHighlight(post);
     });
@@ -63,15 +72,44 @@ async function classify(post) {
   if (result?.error) throw new Error(result.error);
   const matches = Array.isArray(result?.matches) ? result.matches : [];
   if (matches.length) {
-    post.style.setProperty('background-color', MATCH_COLOR, 'important');
-    post.style.setProperty('box-shadow', `inset 3px 0 ${BORDER_COLOR}`, 'important');
+    if (config.matchAction === 'hide') {
+      setPostStyle(post, 'display', 'none', 'important');
+    } else {
+      setPostStyle(post, 'background-color', MATCH_COLOR, 'important');
+      setPostStyle(post, 'box-shadow', `inset 3px 0 ${BORDER_COLOR}`, 'important');
+    }
+    if (!originalTitles.has(post)) originalTitles.set(post, post.title);
     post.title = `Jev match: ${matches.join(', ')}`;
   }
   post.dataset.jevFilterChecked = 'done';
 }
 
 function resetHighlight(post) {
-  post.style.removeProperty('background-color');
-  post.style.removeProperty('box-shadow');
-  post.removeAttribute('title');
+  const savedStyles = originalStyles.get(post);
+  if (savedStyles) {
+    for (const [property, original] of savedStyles) {
+      if (original.value) post.style.setProperty(property, original.value, original.priority);
+      else post.style.removeProperty(property);
+    }
+    originalStyles.delete(post);
+  }
+  if (originalTitles.has(post)) {
+    post.title = originalTitles.get(post);
+    originalTitles.delete(post);
+  }
+}
+
+function setPostStyle(post, property, value, priority) {
+  let savedStyles = originalStyles.get(post);
+  if (!savedStyles) {
+    savedStyles = new Map();
+    originalStyles.set(post, savedStyles);
+  }
+  if (!savedStyles.has(property)) {
+    savedStyles.set(property, {
+      value: post.style.getPropertyValue(property),
+      priority: post.style.getPropertyPriority(property)
+    });
+  }
+  post.style.setProperty(property, value, priority);
 }
