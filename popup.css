@@ -1,0 +1,21 @@
+* { box-sizing: border-box; }
+body { margin: 0; width: 340px; background: #f7f8fa; color: #18212f; font: 14px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+main { padding: 20px; }
+header { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; }
+.mark { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: #e43f4e; color: white; font-size: 21px; font-weight: 750; }
+h1 { margin: 0; font-size: 17px; letter-spacing: -.2px; }
+header p, .hint { margin: 3px 0 0; color: #697586; font-size: 12px; }
+.field-label { display: block; margin-bottom: 7px; font-size: 12px; font-weight: 650; }
+input { width: 100%; height: 38px; padding: 0 11px; border: 1px solid #d7dce3; border-radius: 8px; background: white; color: #18212f; font: inherit; outline: none; }
+input:focus { border-color: #6378dd; box-shadow: 0 0 0 3px #6378dd20; }
+.hint { margin: 6px 0 20px; }
+.section-heading { display: flex; align-items: baseline; justify-content: space-between; }
+.section-heading span { color: #8993a1; font-size: 10px; font-weight: 700; letter-spacing: .8px; }
+.categories { display: grid; gap: 8px; }
+button { width: 100%; height: 40px; margin-top: 16px; border: 0; border-radius: 8px; background: #202b3c; color: white; font: inherit; font-weight: 650; cursor: pointer; }
+button:hover { background: #34435a; }
+button.secondary { height: 32px; margin-top: 6px; background: transparent; color: #596579; font-size: 12px; }
+button.secondary:hover { background: #edf0f4; }
+#status { min-height: 18px; margin-top: 8px; color: #28774f; font-size: 12px; text-align: center; }
+#status.error { color: #c43543; }
+footer { margin-top: 14px; padding-top: 12px; border-top: 1px solid #e5e8ed; color: #8993a1; font-size: 11px; text-align: center; }

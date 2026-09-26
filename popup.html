@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jev X Post Filter</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="mark">J</div>
+      <div><h1>Jev post filter</h1><p>Highlight matching posts on X</p></div>
+    </header>
+    <form id="settings">
+      <label class="field-label" for="apiKey">OpenRouter API key</label>
+      <input id="apiKey" type="password" autocomplete="off" placeholder="sk-or-v1-…">
+      <p class="hint">Kept for this browser session and sent to OpenRouter for classification.</p>
+      <div class="section-heading"><label class="field-label" for="category1">Categories</label><span>UP TO 5</span></div>
+      <div class="categories">
+        <input id="category1" type="text" maxlength="100" placeholder="e.g. posts about AI">
+        <input id="category2" type="text" maxlength="100" placeholder="e.g. posts about cooking">
+        <input id="category3" type="text" maxlength="100" placeholder="Category 3 (optional)">
+        <input id="category4" type="text" maxlength="100" placeholder="Category 4 (optional)">
+        <input id="category5" type="text" maxlength="100" placeholder="Category 5 (optional)">
+      </div>
+      <button type="submit">Save settings</button>
+      <button id="forgetKey" class="secondary" type="button">Forget API key</button>
+      <div id="status" role="status" aria-live="polite"></div>
+    </form>
+    <footer>Jev 1.13 · A matching post gets a red highlight</footer>
+  </main>
+  <script src="popup.js"></script>
+</body>
+</html>

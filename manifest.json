@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "minimum_chrome_version": "102",
+  "name": "Jev X Post Filter",
+  "version": "1.0.0",
+  "description": "Highlight X posts that match your categories using Jev via OpenRouter.",
+  "permissions": ["storage"],
+  "host_permissions": ["https://openrouter.ai/*"],
+  "background": { "service_worker": "background.js" },
+  "action": { "default_popup": "popup.html", "default_title": "Jev X Post Filter" },
+  "content_scripts": [{
+    "matches": ["https://x.com/*", "https://www.x.com/*", "https://twitter.com/*", "https://www.twitter.com/*"],
+    "js": ["content.js"],
+    "run_at": "document_idle"
+  }]
+}
