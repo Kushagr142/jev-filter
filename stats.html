@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Detection statistics · Jev X Post Filter</title>
+  <link rel="stylesheet" href="stats.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div>
+        <p class="eyebrow">JEV X POST FILTER</p>
+        <h1>Detection statistics</h1>
+        <p class="subtitle">Positive post detections by classifier. Counts are saved locally for up to 90 days.</p>
+      </div>
+      <a href="popup.html">Settings</a>
+    </header>
+    <section class="summary" aria-live="polite">
+      <div><span id="sessionTotal">0</span><small>positive classifier detections this session</small></div>
+      <div><span id="hourTotal">0</span><small>positive classifier detections in the last hour</small></div>
+    </section>
+    <section class="report">
+      <div class="report-heading">
+        <div><h2 id="reportTitle">Hourly breakdown</h2><p id="reportDescription">Each row is an hour; columns are your classifiers.</p></div>
+        <label for="period">Group by
+          <select id="period">
+            <option value="hour">Hour · past 24 hours</option>
+            <option value="day">Day · past 7 days</option>
+            <option value="week">Week · past 12 weeks</option>
+          </select>
+        </label>
+      </div>
+      <div id="empty" hidden>No categories configured yet. Add categories in settings to start classifying posts.</div>
+      <div id="tableWrap" class="table-wrap"></div>
+    </section>
+    <p class="note">A post can count for more than one classifier. Re-evaluating the same post after a refresh or category change can add another positive detection.</p>
+  </main>
+  <script src="stats.js"></script>
+</body>
+</html>

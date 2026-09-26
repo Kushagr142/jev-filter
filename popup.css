@@ -8,6 +8,8 @@ header p, .hint { margin: 3px 0 0; color: #697586; font-size: 12px; }
 .field-label { display: block; margin-bottom: 7px; font-size: 12px; font-weight: 650; }
 input { width: 100%; height: 38px; padding: 0 11px; border: 1px solid #d7dce3; border-radius: 8px; background: white; color: #18212f; font: inherit; outline: none; }
 input:focus { border-color: #6378dd; box-shadow: 0 0 0 3px #6378dd20; }
+select { width: 100%; height: 38px; padding: 0 10px; border: 1px solid #d7dce3; border-radius: 8px; background: white; color: #18212f; font: inherit; }
+.badge-setting { margin-top: 16px; }
 .hint { margin: 6px 0 20px; }
 .section-heading { display: flex; align-items: baseline; justify-content: space-between; }
 .section-heading span { color: #8993a1; font-size: 10px; font-weight: 700; letter-spacing: .8px; }
